@@ -31,7 +31,32 @@ router.get("/:id", async(req, res, next)=>{
     }
 });
 
-// later
-// add & delete song
+router.post("/", async (req, res, next)=>{
+    try{
+        const {title, artist, file_url} = req.body;
+
+        if(!title || !file_url){
+            return res.status(400).json({error: "Title and file_url is required"})
+        }
+
+        const [result] = await db.query(
+            "INSERT INTO songs (title, artist, file_url) VALUES (?,?,?)",
+            [title, artist, file_url]
+        )
+
+        res.status(201).json({
+            id: result.insertId,
+            title,
+            artist: artist || null,
+            file_url
+        });
+
+    }
+    catch(err){
+        next(err);
+    }
+});
+
+
 
 module.exports = router;

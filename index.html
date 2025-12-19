@@ -15,6 +15,18 @@
         src=""
     />
   </div>
+  <div class="newSong">
+   <input type="text" id="title" placeholder="song title" required>
+   <input type="text" id="artist" placeholder="artist" required>
+   <input 
+   type="text" id="file_url" 
+   placeholder="file_url" 
+   pattern="(?=.*[a-z])(?=.*[\W_]).+" 
+   title="Must contain all lowercase letter and words seperated by '-' "
+   required>
+
+   <button class="btn">Add Song</button>
+  </div>
 
   <div id="cover"></div>  
 
